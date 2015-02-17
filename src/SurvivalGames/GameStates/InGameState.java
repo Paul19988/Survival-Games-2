@@ -225,27 +225,63 @@ public class InGameState extends GameState implements Listener {
 		Player p = e.getPlayer();
 		gameInstance.addSpectator(p);
 	}
-
-	public static HashMap<Location, Inventory> crates = new HashMap<Location, Inventory>();
-	public static HashMap<String, Location> loc = new HashMap<String, Location>();
+	
+	/*
+	 * 
+	 * New System By @Thecheatgamer1
+	 * 
+	 */
+	
+	private int tier1ItemAmount = getItemsinTierSector(ECrateTiers.TIER1);
+	private int tier2ItemAmount = getItemsinTierSector(ECrateTiers.TIER2);
 	
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
 		Location loc;
+		Inventory inv;
 		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock().getType().equals(Material.REDSTONE_BLOCK)) {
 			loc = e.getClickedBlock().getLocation();
+			inv = Bukkit.createInventory(null, 27, ChatColor.DARK_RED + "TMSN" + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + ">" + ChatColor.GREEN + "Supply Crate");
 			
+			int itemsInChest = random.nextInt();
+			ECrateTiers randomTier = random.nextInt(2) == 0 ? ECrateTiers.TIER1 : ECrateTiers.TIER2;
+			
+			for (int i = 0; i < itemsInChest; i++) {
+				inv.setItem(random.nextInt(inv.getSize()), new ItemStack(getRandomItem(randomTier)));
+			}
 		}
 	}
 	
+	private int randomchance = 0;
+	private int[] options = getChoicesOfValues(ECrateTiers.TIER1);
+	private int[] options2 = getChoicesOfValues(ECrateTiers.TIER2);
+	private int[] chosenItems;
+	
 	private Material getRandomItem(ECrateTiers tier) {
+		int chances = random.nextInt(options.length);
+		chosenItems = new int[chances];
 		if (tier == ECrateTiers.TIER1) {
-			int[] options = getChoicesOfValues();
+			for (int item = 0; item < chances; item++) {
+				chosenItems[item] = options[item];
+			}
+			
+			for (int m = 0; m < ECrateItem.values().length; m++) {
+				int a = ECrateItem.values()[m].chanceToSpawnInTier;
+				if (a == chosenItems[random.nextInt(chosenItems.length)]) {
+					return ECrateItem.values()[m].material;
+				}
+			}
 		} else if (tier == ECrateTiers.TIER2) {
-			int[] options = getChoicesOfValues();
-			for (int item = 0; item < random.nextInt(101); item++) {
-				
+			for (int item = 0; item < chances; item++) {
+				chosenItems[item] = options[item];
+			}
+			
+			for (int m = 0; m < ECrateItem.values().length; m++) {
+				int a = ECrateItem.values()[m].chanceToSpawnInTier;
+				if (a == chosenItems[random.nextInt(chosenItems.length)]) {
+					return ECrateItem.values()[m].material;
+				}
 			}
 		} else {
 			throwDeveloperErrorMessage(getErrorLocation());
@@ -255,10 +291,18 @@ public class InGameState extends GameState implements Listener {
 		return null;
 	}
 	
-	private int[] getChoicesOfValues() {
-		int[] values = new int[ECrateTiers.values().length];
-		for (int a = 0; a < ECrateTiers.values().length; a++) {
-			
+	private int getItemsinTierSector(ECrateTiers tier) {
+		int amount = 0;
+		for (int a = 0; a < ECrateItem.values().length; a++) {
+			if (ECrateItem.values()[a].name().contains((tier == ECrateTiers.TIER1 ? "1" : "2"))) amount++;
+		}
+		return amount;
+	}
+	
+	private int[] getChoicesOfValues(ECrateTiers tier) {
+		int[] values = new int[(tier == ECrateTiers.TIER1 ? tier1ItemAmount : tier2ItemAmount)];
+		for (int a = tier == ECrateTiers.TIER1 ? tier1ItemAmount : 0; a < (tier == ECrateTiers.TIER1 ? tier1ItemAmount : tier2ItemAmount); a++) {
+			values[a] = ECrateItem.values()[a].chanceToSpawnInTier;
 		}
 		return values;
 	}
@@ -274,6 +318,15 @@ public class InGameState extends GameState implements Listener {
 	private String getErrorLocation() {
 		return ele[0].getFileName() + " >> " + ele[0].getMethodName() + " >> " + ele[0].getLineNumber();
 	}
+	
+	/*
+	 * 
+	 * End of the new system
+	 * 
+	 */
+	
+	public static HashMap<Location, Inventory> crates = new HashMap<Location, Inventory>();
+	public static HashMap<String, Location> loc = new HashMap<String, Location>();
 	
 	@Deprecated
 	@EventHandler
