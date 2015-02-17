@@ -88,6 +88,7 @@ public class LobbyState extends GameState implements Listener {
 		e.setCancelled(true);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void tick() {
 		lobbyTimer--;
@@ -112,7 +113,7 @@ public class LobbyState extends GameState implements Listener {
 		}
 		if (lobbyTimer == 0) {
 			if (Core.plugin.getServer().getOnlinePlayers().length < 12) {
-				for (Player all : Bukkit.getOnlinePlayers()) {
+				for (Player all : Core.plugin.getServer().getOnlinePlayers()) {
 					V.prefix.addRecipient(all).send("Restarting Timer! (" + Bukkit.getOnlinePlayers().length + "/" + Bukkit.getMaxPlayers() + ")");
 				}
 				lobbyTimer = 60;
@@ -176,6 +177,7 @@ public class LobbyState extends GameState implements Listener {
 	private Message m = new Message(Message.BLANK);
 	public ArrayList<String> Voted = new ArrayList<String>();
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
@@ -205,6 +207,7 @@ public class LobbyState extends GameState implements Listener {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onItemDragged(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();
