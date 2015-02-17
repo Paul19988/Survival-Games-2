@@ -33,6 +33,8 @@ import me.olivervscreeper.networkutilities.messages.MessageDisplay;
 
 public class LobbyState extends GameState implements Listener {
 
+	private int lobbyTimer = 60;
+	
 	public LobbyState(Game game) {
 		super(game, "LobbyState", "LobbyState");
 	}
@@ -58,12 +60,73 @@ public class LobbyState extends GameState implements Listener {
 		unregisterListener(this);
 		return true;
 	}
+	
+	@EventHandler
+	public void onFood(FoodLevelChangeEvent e) {
+		e.setCancelled(true);
+	}
 
-	int lobbytimer = 60;
+	Message m = new Message(Message.BLANK);
+	public static ArrayList<String> Voted = new ArrayList<String>();
 
-	@SuppressWarnings("deprecation")
+	@EventHandler
+	public void onDamage(EntityDamageEvent e) {
+		e.setCancelled(true);
+	}
+
+	@EventHandler
+	public void onDrop(PlayerDropItemEvent e) {
+		e.setCancelled(true);
+	}
+
+	@EventHandler
+	public void onPickup(PlayerPickupItemEvent e) {
+		e.setCancelled(true);
+	}
+	
+	@EventHandler
+	public void onWeather(WeatherChangeEvent e) {
+		e.setCancelled(true);
+	}
+	
 	@Override
 	public void tick() {
+		lobbyTimer--;
+		String timer;
+		Player[] players = Core.plugin.getServer().getOnlinePlayers();
+		Message m = new Message(Message.BLANK);
+		for (Player p : players) {
+			m.addRecipient(p);
+		}
+		m.send(ChatColor.AQUA + "" + ChatColor.BOLD + "00:" + lobbyTimer, MessageDisplay.ACTIONBAR);
+		
+		if (lobbyTimer == 0) {
+			m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "1 Seconds!", MessageDisplay.TITLE); 
+			if (players.length < 12) {
+				
+			} else {
+				for (Player all : players) {
+					V.prefix.addRecipient(all).send("Starting game!");
+				}
+				m.send(ChatColor.AQUA + "" + ChatColor.BOLD + "Starting Game!", MessageDisplay.TITLE);
+				gameInstance.nextState();
+			}
+		}
+		if (lobbyTimer == 1) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "2 Seconds!", MessageDisplay.TITLE);
+		if (lobbyTimer == 2) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "3 Seconds!", MessageDisplay.TITLE);
+		if (lobbyTimer == 3) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "4 Seconds!", MessageDisplay.TITLE);
+		if (lobbyTimer == 4) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "5 Seconds!", MessageDisplay.TITLE);
+		if (lobbyTimer == 5) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "10 Seconds!", MessageDisplay.TITLE);
+		if (lobbyTimer == 10) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "20 Seconds!", MessageDisplay.TITLE);
+		if (lobbyTimer == 20) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "30 Seconds!", MessageDisplay.TITLE);
+		if (lobbyTimer == 30) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "40 Seconds!", MessageDisplay.TITLE);
+		if (lobbyTimer == 40) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "50 Seconds!", MessageDisplay.TITLE);
+		if (lobbyTimer == 50) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "1 Minute!", MessageDisplay.TITLE);
+		if (lobbyTimer == 59) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "1 Minute!", MessageDisplay.TITLE);
+	}
+	
+	@Override
+	public void oldtick() {
 		lobbytimer--;
 		String timer = "";
 		for (Player all : Bukkit.getOnlinePlayers()) {
@@ -153,34 +216,6 @@ public class LobbyState extends GameState implements Listener {
 				gameInstance.nextState();
 			}
 		}
-	}
-
-	@EventHandler
-	public void onFood(FoodLevelChangeEvent e) {
-		e.setCancelled(true);
-	}
-
-	Message m = new Message(Message.BLANK);
-	public static ArrayList<String> Voted = new ArrayList<String>();
-
-	@EventHandler
-	public void onDamage(EntityDamageEvent e) {
-		e.setCancelled(true);
-	}
-
-	@EventHandler
-	public void onDrop(PlayerDropItemEvent e) {
-		e.setCancelled(true);
-	}
-
-	@EventHandler
-	public void onPickup(PlayerPickupItemEvent e) {
-		e.setCancelled(true);
-	}
-	
-	@EventHandler
-	public void onWeather(WeatherChangeEvent e) {
-		e.setCancelled(true);
 	}
 
 	public static int Map1;
