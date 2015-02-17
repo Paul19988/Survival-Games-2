@@ -183,7 +183,19 @@ public class InGameState extends GameState implements Listener {
 
 	public static HashMap<Location, Inventory> crates = new HashMap<Location, Inventory>();
 	public static HashMap<String, Location> loc = new HashMap<String, Location>();
-
+	
+	@EventHandler
+	public void onPlayerInteract(PlayerInteractEvent e) {
+		Player p = e.getPlayer();
+		Location loc;
+		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock().getType().equals(Material.REDSTONE_BLOCK)) {
+			loc = e.getClickedBlock().getLocation();
+			
+			
+		}
+	}
+	
+	@Deprecated
 	@EventHandler
 	public void onInteract(PlayerInteractEvent e) {
 		Player p = e.getPlayer();

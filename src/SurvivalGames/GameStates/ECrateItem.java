@@ -12,15 +12,17 @@ public enum ECrateItem {
 	LEATHER_HELMENT1(Material.LEATHER_HELMET, ECrateTiers.TIER1, 40),
 	LEATHER_CHESTPLATE1(Material.LEATHER_CHESTPLATE ,ECrateTiers.TIER1, 20),
 	LEATHER_LEGGINGS1(Material.LEATHER_LEGGINGS, ECrateTiers.TIER1, 30),
-	LEATHER_BOOTS1(Material.LEATHER_BOOTS, ECrateTiers.TIER1, 50);
+	LEATHER_BOOTS1(Material.LEATHER_BOOTS, ECrateTiers.TIER1, 50),
 	
 	// Tier 2
 	
-	// Tier 3
-	
-	// Tier 4
-	
-	// Tier 5
+	APPLE2(Material.APPLE, ECrateTiers.TIER2, 75),
+	PUMPKIN_PIE2(Material.PUMPKIN_PIE, ECrateTiers.TIER2, 30),
+	COOKIE2(Material.COOKIE, ECrateTiers.TIER2, 75),
+	FLINT2(Material.FLINT, ECrateTiers.TIER2, 50),
+	COOKED_CHICKEN2(Material.COOKED_CHICKEN, ECrateTiers.TIER2, 40),
+	RAW_CHICKEN2(Material.RAW_CHICKEN, ECrateTiers.TIER2, 60),
+	COOKED_BEEF2(Material.COOKED_BEEF, ECrateTiers.TIER2, 40);
 	
 	private Material material;
 	private ECrateTiers tier;
