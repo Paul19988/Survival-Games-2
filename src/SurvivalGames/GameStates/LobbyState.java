@@ -68,9 +68,6 @@ public class LobbyState extends GameState implements Listener {
 		e.setCancelled(true);
 	}
 
-	Message m = new Message(Message.BLANK);
-	public static ArrayList<String> Voted = new ArrayList<String>();
-
 	@EventHandler
 	public void onDamage(EntityDamageEvent e) {
 		e.setCancelled(true);
@@ -143,8 +140,8 @@ public class LobbyState extends GameState implements Listener {
 		if (lobbyTimer == 59) m.send(ChatColor.GREEN + "" + ChatColor.BOLD + "1 Minute Until the Game Begins!", MessageDisplay.TITLE);
 	}
 	
-	private int mapAmount = 4;
-	private int[] maps = new int[mapAmount];
+	private static int mapAmount = 4;
+	private static int[] maps = new int[mapAmount];
 	private Score[] mapTitles = new Score[mapAmount];
 	
 	private ScoreboardManager sm;
@@ -175,6 +172,9 @@ public class LobbyState extends GameState implements Listener {
 		
 		p.setScoreboard(s);
 	}
+	
+	private Message m = new Message(Message.BLANK);
+	public ArrayList<String> Voted = new ArrayList<String>();
 	
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
@@ -297,5 +297,9 @@ public class LobbyState extends GameState implements Listener {
 			p.openInventory(inv);
 		}
 		e.setCancelled(true);
+	}
+	
+	public static int[] getMaps() {
+		return maps;
 	}
 }
