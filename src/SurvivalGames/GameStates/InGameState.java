@@ -28,7 +28,10 @@ import SurvivalGames.Core;
 import SurvivalGames.V;
 
 public class InGameState extends GameState implements Listener {
-
+	
+	private Random random = new Random();
+	private StackTraceElement[] ele = Thread.currentThread().getStackTrace();
+	
 	public InGameState(Game game) {
 		super(game, "InGameState", "InGameState");
 	}
@@ -191,8 +194,42 @@ public class InGameState extends GameState implements Listener {
 		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock().getType().equals(Material.REDSTONE_BLOCK)) {
 			loc = e.getClickedBlock().getLocation();
 			
+		}
+	}
+	
+	private Material getRandomItem(ECrateTiers tier) {
+		if (tier == ECrateTiers.TIER1) {
+			int[] options = getChoicesOfValues();
+		} else if (tier == ECrateTiers.TIER2) {
+			for (int item = 0; item < random.nextInt(101); item++) {
+				
+			}
+		} else {
+			throwDeveloperErrorMessage(getErrorLocation());
+			return Material.AIR;
+		}
+		throwDeveloperErrorMessage(getErrorLocation(), new NullPointerException());
+		return null;
+	}
+	
+	private int[] getChoicesOfValues() {
+		int[] values = new int[ECrateTiers.values().length];
+		for (int a = 0; a < ECrateTiers.values().length; a++) {
 			
 		}
+		return values;
+	}
+	
+	private void throwDeveloperErrorMessage(String errorLocation) {
+		Core.game.getLogger().log("Developer", "An Error has occured! [" + errorLocation + "] \nPlease contact Twitter >>> @Paul19988 or @Thecheatgamer1");
+	}
+	
+	private void throwDeveloperErrorMessage(String errorLocation, Exception ex) {
+		Core.game.getLogger().log("Developer", "An Error has occured! [" + errorLocation + "]\n" + ex.getMessage() + " \nPlease contact Twitter >>> @Paul19988 or @Thecheatgamer1");
+	}
+	
+	private String getErrorLocation() {
+		return ele[0].getFileName() + " >> " + ele[0].getMethodName() + " >> " + ele[0].getLineNumber();
 	}
 	
 	@Deprecated
