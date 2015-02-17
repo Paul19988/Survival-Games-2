@@ -2,6 +2,11 @@ package SurvivalGames.GameStates;
 
 import java.util.ArrayList;
 
+import me.olivervscreeper.networkutilities.game.Game;
+import me.olivervscreeper.networkutilities.game.states.GameState;
+import me.olivervscreeper.networkutilities.messages.Message;
+import me.olivervscreeper.networkutilities.messages.MessageDisplay;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -22,14 +27,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
+import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
 import SurvivalGames.Core;
 import SurvivalGames.V;
-import me.olivervscreeper.networkutilities.game.Game;
-import me.olivervscreeper.networkutilities.game.states.GameState;
-import me.olivervscreeper.networkutilities.messages.Message;
-import me.olivervscreeper.networkutilities.messages.MessageDisplay;
 
 public class LobbyState extends GameState implements Listener {
 
@@ -92,7 +94,6 @@ public class LobbyState extends GameState implements Listener {
 	@Override
 	public void tick() {
 		lobbyTimer--;
-		String timer;
 		Player[] players = Core.plugin.getServer().getOnlinePlayers();
 		Message m = new Message(Message.BLANK);
 		for (Player p : players) {
@@ -112,166 +113,82 @@ public class LobbyState extends GameState implements Listener {
 				gameInstance.nextState();
 			}
 		}
-		if (lobbyTimer == 1) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "2 Seconds!", MessageDisplay.TITLE);
-		if (lobbyTimer == 2) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "3 Seconds!", MessageDisplay.TITLE);
-		if (lobbyTimer == 3) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "4 Seconds!", MessageDisplay.TITLE);
-		if (lobbyTimer == 4) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "5 Seconds!", MessageDisplay.TITLE);
-		if (lobbyTimer == 5) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "10 Seconds!", MessageDisplay.TITLE);
-		if (lobbyTimer == 10) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "20 Seconds!", MessageDisplay.TITLE);
-		if (lobbyTimer == 20) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "30 Seconds!", MessageDisplay.TITLE);
-		if (lobbyTimer == 30) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "40 Seconds!", MessageDisplay.TITLE);
-		if (lobbyTimer == 40) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "50 Seconds!", MessageDisplay.TITLE);
-		if (lobbyTimer == 50) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "1 Minute!", MessageDisplay.TITLE);
-		if (lobbyTimer == 59) m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "1 Minute!", MessageDisplay.TITLE);
-	}
-	
-	@Override
-	public void oldtick() {
-		lobbytimer--;
-		String timer = "";
-		for (Player all : Bukkit.getOnlinePlayers()) {
-			m.addRecipient(all);
-		}
-	    if(lobbytimer <10){
-	    	timer = "00:0" + lobbytimer;
-	    	m.send(ChatColor.AQUA + "" + ChatColor.BOLD + timer, MessageDisplay.ACTIONBAR);
-	    }else{
-		m.send(ChatColor.AQUA + "" + ChatColor.BOLD + "00:" + lobbytimer, MessageDisplay.ACTIONBAR);
-	    }
-		if (lobbytimer == 59) {
-			for (Player all : Bukkit.getOnlinePlayers()) {
-				V.prefix.addRecipient(all).send("1 Minute till game starts!");
-			}
-		}
-		if (lobbytimer == 50) {
-			for (Player all : Bukkit.getOnlinePlayers()) {
-				V.prefix.addRecipient(all).send("50 Seconds till game starts!");
-			}
-		}
-		if (lobbytimer == 40) {
-			for (Player all : Bukkit.getOnlinePlayers()) {
-				V.prefix.addRecipient(all).send("40 Seconds till game starts!");
-			}
-		}
-		if (lobbytimer == 30) {
-			for (Player all : Bukkit.getOnlinePlayers()) {
-				V.prefix.addRecipient(all).send("30 Seconds till game starts!");
-			}
-		}
-		if (lobbytimer == 20) {
-			for (Player all : Bukkit.getOnlinePlayers()) {
-				V.prefix.addRecipient(all).send("20 Seconds till game starts!");
-			}
-		}
-		if (lobbytimer == 10) {
-			for (Player all : Bukkit.getOnlinePlayers()) {
-				V.prefix.addRecipient(all).send("10 Seconds till game starts!");
-			}
-		}
-		if (lobbytimer == 5) {
-			for (Player all : Bukkit.getOnlinePlayers()) {
-				m.addRecipient(all);
-			}
-			m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "5", MessageDisplay.TITLE);
-		}
-		if (lobbytimer == 4) {
-			for (Player all : Bukkit.getOnlinePlayers()) {
-				m.addRecipient(all);
-			}
-			m.send(ChatColor.RED + "" + ChatColor.BOLD + "4", MessageDisplay.TITLE);
-		}
-		if (lobbytimer == 3) {
-			for (Player all : Bukkit.getOnlinePlayers()) {
-				m.addRecipient(all);
-			}
-			m.send(ChatColor.GOLD + "" + ChatColor.BOLD + "3", MessageDisplay.TITLE);
-		}
-		if (lobbytimer == 2) {
-			for (Player all : Bukkit.getOnlinePlayers()) {
-				m.addRecipient(all);
-			}
-			m.send(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "2", MessageDisplay.TITLE);
-		}
-		if (lobbytimer == 1) {
-			for (Player all : Bukkit.getOnlinePlayers()) {
-				m.addRecipient(all);
-			}
-			m.send(ChatColor.GREEN + "" + ChatColor.BOLD + "1", MessageDisplay.TITLE);
-		}
-		if (lobbytimer == 0) {
-			if (Bukkit.getOnlinePlayers().length < 12) {
+		if (lobbyTimer == 0) {
+			if (Core.plugin.getServer().getOnlinePlayers().length < 12) {
 				for (Player all : Bukkit.getOnlinePlayers()) {
 					V.prefix.addRecipient(all).send("Restarting Timer! (" + Bukkit.getOnlinePlayers().length + "/" + Bukkit.getMaxPlayers() + ")");
-					m.addRecipient(all);
 				}
-				lobbytimer = 60;
+				lobbyTimer = 60;
 				Core.game.getLogger().log("In-Lobby", "Not Enough Players Restarting! (" + Bukkit.getOnlinePlayers().length + "/" + Bukkit.getMaxPlayers() + ")");
 				m.send(ChatColor.AQUA + "" + ChatColor.BOLD + "Restarting Timer! (" + Bukkit.getOnlinePlayers().length + "/" + Bukkit.getMaxPlayers() + ")", MessageDisplay.TITLE);
 			} else {
-				for (Player all : Bukkit.getOnlinePlayers()) {
+				for (Player all : Core.plugin.getServer().getOnlinePlayers()) {
 					V.prefix.addRecipient(all).send("Starting game!");
-					m.addRecipient(all);
 				}
 				m.send(ChatColor.AQUA + "" + ChatColor.BOLD + "Starting Game!", MessageDisplay.TITLE);
 				gameInstance.nextState();
 			}
 		}
+		if (lobbyTimer == 1) m.send(ChatColor.GREEN + "" + ChatColor.BOLD + "1", MessageDisplay.TITLE);
+		if (lobbyTimer == 2) m.send(ChatColor.GREEN + "" + ChatColor.BOLD + "2", MessageDisplay.TITLE);
+		if (lobbyTimer == 3) m.send(ChatColor.GREEN + "" + ChatColor.BOLD + "3", MessageDisplay.TITLE);
+		if (lobbyTimer == 4) m.send(ChatColor.GREEN + "" + ChatColor.BOLD + "4", MessageDisplay.TITLE);
+		if (lobbyTimer == 5) m.send(ChatColor.GREEN + "" + ChatColor.BOLD + "5", MessageDisplay.TITLE);
+		if (lobbyTimer == 6) m.send(ChatColor.GREEN + "" + ChatColor.BOLD + "Game will begin in...", MessageDisplay.TITLE);
+		if (lobbyTimer == 10) m.send(ChatColor.GREEN + "" + ChatColor.BOLD + "10 Seconds Until the Game Begins!", MessageDisplay.TITLE);
+		if (lobbyTimer == 20) m.send(ChatColor.GREEN + "" + ChatColor.BOLD + "20 Seconds Until the Game Begins!", MessageDisplay.TITLE);
+		if (lobbyTimer == 30) m.send(ChatColor.GREEN + "" + ChatColor.BOLD + "30 Seconds Until the Game Begins!", MessageDisplay.TITLE);
+		if (lobbyTimer == 40) m.send(ChatColor.GREEN + "" + ChatColor.BOLD + "40 Seconds Until the Game Begins!", MessageDisplay.TITLE);
+		if (lobbyTimer == 50) m.send(ChatColor.GREEN + "" + ChatColor.BOLD + "50 Seconds Until the Game Begins!", MessageDisplay.TITLE);
+		if (lobbyTimer == 59) m.send(ChatColor.GREEN + "" + ChatColor.BOLD + "1 Minute Until the Game Begins!", MessageDisplay.TITLE);
 	}
-
-	public static int Map1;
-	public static int Map2;
-	public static int Map3;
-	public static int Map4;
+	
+	private int mapAmount = 4;
+	private int[] maps = new int[mapAmount];
+	private Score[] mapTitles = new Score[mapAmount];
+	
+	private ScoreboardManager sm;
+	private Scoreboard s;
+	private Objective o;
 
 	@SuppressWarnings("deprecation")
 	public void MapUpdate(Player p) {
-		ScoreboardManager sm = Bukkit.getServer().getScoreboardManager();
+		sm = Bukkit.getServer().getScoreboardManager();
 
-		org.bukkit.scoreboard.Scoreboard s = sm.getNewScoreboard();
-		Objective o = s.registerNewObjective("Dash", "dummy");
+		s = sm.getNewScoreboard();
+		o = s.registerNewObjective("Dash", "dummy");
 
 		o.setDisplaySlot(DisplaySlot.SIDEBAR);
 		o.setDisplayName(ChatColor.DARK_RED + "Map Votes:");
+		
+		mapTitles[0] = o.getScore(Core.plugin.getServer().getOfflinePlayer(ChatColor.GOLD + "" + ChatColor.BOLD + "Tribal Vibes"));
+		mapTitles[0].setScore(maps[0]);
 
-		Score Map1Title = null;
-		Score Map2Title = null;
-		Score Map3Title = null;
-		Score Map4Title = null;
+		mapTitles[1] = o.getScore(Bukkit.getServer().getOfflinePlayer(ChatColor.GOLD + "" + ChatColor.BOLD + "Avaricia"));
+		mapTitles[1].setScore(maps[1]);
 
-		Map1Title = o.getScore(Bukkit.getServer().getOfflinePlayer(ChatColor.GOLD + "" + ChatColor.BOLD + "Tribal Vibes"));
+		mapTitles[2] = o.getScore(Bukkit.getServer().getOfflinePlayer(ChatColor.GOLD + "" + ChatColor.BOLD + "SG 6"));
+		mapTitles[2].setScore(maps[2]);
 
-		Map1Title.setScore(Map1);
-
-		Map2Title = o.getScore(Bukkit.getServer().getOfflinePlayer(ChatColor.GOLD + "" + ChatColor.BOLD + "Avaricia"));
-
-		Map2Title.setScore(Map2);
-
-		Map3Title = o.getScore(Bukkit.getServer().getOfflinePlayer(ChatColor.GOLD + "" + ChatColor.BOLD + "SG 6"));
-
-		Map3Title.setScore(Map3);
-
-		Map4Title = o.getScore(Bukkit.getServer().getOfflinePlayer(ChatColor.GOLD + "" + ChatColor.BOLD + "SG Highway"));
-
-		Map4Title.setScore(Map4);
-
+		mapTitles[3] = o.getScore(Bukkit.getServer().getOfflinePlayer(ChatColor.GOLD + "" + ChatColor.BOLD + "SG Highway"));
+		mapTitles[3].setScore(maps[3]);
+		
 		p.setScoreboard(s);
-
 	}
 	
-	@SuppressWarnings("deprecation")
 	@EventHandler
-	public void onPJoin(PlayerJoinEvent e) {
+	public void onPlayerJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
-		for (Player all : Bukkit.getOnlinePlayers()) {
+		Player[] players = Core.plugin.getServer().getOnlinePlayers();
+		for (Player all : players) {
 			all.showPlayer(p);
 			p.showPlayer(all);
 			m.addRecipient(all);
 		}
+		
 		m.send("", MessageDisplay.TITLE);
-		for (Player all : Bukkit.getOnlinePlayers()) {
-			m.addRecipient(all);
-		}
 		m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + p.getName() + ChatColor.AQUA + "" + ChatColor.BOLD + " has joined Survival Games!", MessageDisplay.SUBTITLE);
+		
 		e.setJoinMessage(null);
 		Core.game.addPlayer(p);
 		MapUpdate(p);
@@ -287,56 +204,56 @@ public class LobbyState extends GameState implements Listener {
 			}
 		}
 	}
-
-	@SuppressWarnings("deprecation")
+	
 	@EventHandler
-	public void onItemDrag(InventoryClickEvent e) {
+	public void onItemDragged(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();
+		Player[] players = Core.plugin.getServer().getOnlinePlayers();
 		if (e.getCurrentItem().getType() == Material.MAP && e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Vote Tribal Vibes!")) {
 			V.prefix.addRecipient(p).send("You just voted for Tribal Vibes!");
-			Map1 = Map1 + 1;
-			V.prefix.addRecipient(p).send("Tribal Vibes now has " + Map1 + " Vote(s)!");
+			maps[0] = maps[0] + 1;
+			V.prefix.addRecipient(p).send("Tribal Vibes now has " + maps[0] + " Vote(s)!");
 			p.closeInventory();
 			p.getInventory().setItem(0, null);
 			Voted.add(p.getName());
 			e.setCancelled(true);
-			for (Player all : Bukkit.getOnlinePlayers()) {
+			for (Player all : players) {
 				MapUpdate(all);
 			}
 		}
 		if (e.getCurrentItem().getType() == Material.MAP && e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Vote Avaricia!")) {
 			V.prefix.addRecipient(p).send("You just voted for Avaricia!");
-			Map2 = Map2 + 1;
-			V.prefix.addRecipient(p).send("Avaricia now has " + Map2 + " Vote(s)!");
+			maps[1] = maps[1] + 1;
+			V.prefix.addRecipient(p).send("Avaricia now has " + maps[1] + " Vote(s)!");
 			p.closeInventory();
 			p.getInventory().setItem(0, null);
 			Voted.add(p.getName());
 			e.setCancelled(true);
-			for (Player all : Bukkit.getOnlinePlayers()) {
+			for (Player all : players) {
 				MapUpdate(all);
 			}
 		}
 		if (e.getCurrentItem().getType() == Material.MAP && e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Vote Survival Games 6!")) {
 			V.prefix.addRecipient(p).send("You just voted for Survival Games 6!");
-			Map3 = Map3 + 1;
-			V.prefix.addRecipient(p).send("Survival Games 6 now has " + Map3 + " Vote(s)!");
+			maps[2] = maps[2] + 1;
+			V.prefix.addRecipient(p).send("Survival Games 6 now has " + maps[2] + " Vote(s)!");
 			p.closeInventory();
 			p.getInventory().setItem(0, null);
 			Voted.add(p.getName());
 			e.setCancelled(true);
-			for (Player all : Bukkit.getOnlinePlayers()) {
+			for (Player all : players) {
 				MapUpdate(all);
 			}
 		}
 		if (e.getCurrentItem().getType() == Material.MAP && e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Vote Survival Games Highway!")) {
 			V.prefix.addRecipient(p).send("You just voted for Survival Games Highway!");
-			Map4 = Map4 + 1;
-			V.prefix.addRecipient(p).send("Survival Games Highway now has " + Map4 + " Vote(s)!");
+			maps[3] = maps[3] + 1;
+			V.prefix.addRecipient(p).send("Survival Games Highway now has " + maps[3] + " Vote(s)!");
 			p.closeInventory();
 			p.getInventory().setItem(0, null);
 			Voted.add(p.getName());
 			e.setCancelled(true);
-			for (Player all : Bukkit.getOnlinePlayers()) {
+			for (Player all : players) {
 				MapUpdate(all);
 			}
 		}
@@ -344,7 +261,6 @@ public class LobbyState extends GameState implements Listener {
 	}
 
 	public Inventory addItems(Inventory inv) {
-
 		ItemStack Map1 = new ItemStack(Material.MAP, 1);
 		ItemMeta Map1Meta = Map1.getItemMeta();
 		Map1Meta.setDisplayName(ChatColor.GREEN + "Vote Tribal Vibes!");
@@ -370,7 +286,6 @@ public class LobbyState extends GameState implements Listener {
 		inv.setItem(7, Map4);
 
 		return inv;
-
 	}
 
 	@EventHandler
