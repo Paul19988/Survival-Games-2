@@ -14,7 +14,9 @@ import me.olivervscreeper.networkutilities.game.Game;
 import me.olivervscreeper.networkutilities.game.states.GameState;
 
 public class RestartState extends GameState implements Listener {
-
+	
+	private int restartTimer = 11;
+	
 	public RestartState(Game game) {
 		super(game, "Restarting", "Restarting");
 	}
@@ -38,10 +40,7 @@ public class RestartState extends GameState implements Listener {
 	public boolean onStateEnd() {
 		return false;
 	}
-
-	int restartTimer = 11;
-
-	@SuppressWarnings("deprecation")
+	
 	@Override
 	public void tick() {
 		restartTimer--;
@@ -55,7 +54,7 @@ public class RestartState extends GameState implements Listener {
 				V.prefix.addRecipient(p);
 			}
 			V.prefix.send("Server Restarting in 5 seconds!");
-		}else if(restartTimer == 3){
+		} else if (restartTimer == 3) {
 			for(Player p : Bukkit.getOnlinePlayers()) {
 			ByteArrayOutputStream b = new ByteArrayOutputStream();
 			DataOutputStream out = new DataOutputStream(b);
@@ -68,9 +67,8 @@ public class RestartState extends GameState implements Listener {
 			}
 			p.sendPluginMessage(Core.plugin, "BungeeCord", b.toByteArray());
 			}
-		}else if(restartTimer == 0){
+		} else if (restartTimer == 0){
 			Bukkit.shutdown();
 		}
 	}
-
 }
