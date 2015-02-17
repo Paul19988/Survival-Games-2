@@ -8,6 +8,7 @@ import me.olivervscreeper.networkutilities.game.events.PlayerDeathInArenaEvent;
 import me.olivervscreeper.networkutilities.game.states.GameState;
 import me.olivervscreeper.networkutilities.messages.Message;
 import me.olivervscreeper.networkutilities.messages.MessageDisplay;
+import net.minecraft.server.v1_8_R1.Items;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -198,7 +199,9 @@ public class InGameState extends GameState implements Listener {
 					Random i = new Random();
 
 					// Set 1 ---
-
+					
+					
+					
 					if (random == 0) {
 						inv.setItem(i.nextInt(27), new ItemStack(Material.ARROW, i.nextInt(15) + 1));
 					}
