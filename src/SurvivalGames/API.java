@@ -17,8 +17,8 @@ public class API {
     public static String user = Core.SQLConfig.getString("username");
     public static String password = Core.SQLConfig.getString("password");
 
-	static MySQL GameStatsMySQL = new MySQL(host, port, database, user, password);
-	static Connection c = null;
+	protected static MySQL GameStatsMySQL = new MySQL(host, port, database, user, password);
+	protected static Connection c = null;
 	
 	public static String lobbyname = Core.PrefixConfig.getString("lobbyname");
 
@@ -179,5 +179,4 @@ public class API {
 			e.printStackTrace();
 		}
 	}
-
 }

@@ -56,5 +56,4 @@ public class Commands{
     		new Message(Message.INFO).addRecipient(p).send("Failed to save.");
     	}
     }
-    
 }
