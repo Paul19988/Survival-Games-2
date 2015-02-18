@@ -76,16 +76,28 @@ public class InGameState extends GameState implements Listener {
 		RAW_FISH(Material.MELON, ECrateTiers.TIER1, 80),
 		COOKED_FISH(Material.MELON, ECrateTiers.TIER1, 79),
 		
-		
 		// Tier 2
 		
-		APPLE2(Material.APPLE, ECrateTiers.TIER2, 75),
-		PUMPKIN_PIE2(Material.PUMPKIN_PIE, ECrateTiers.TIER2, 30),
-		COOKIE2(Material.COOKIE, ECrateTiers.TIER2, 75),
-		FLINT2(Material.FLINT, ECrateTiers.TIER2, 50),
-		COOKED_CHICKEN2(Material.COOKED_CHICKEN, ECrateTiers.TIER2, 40),
-		RAW_CHICKEN2(Material.RAW_CHICKEN, ECrateTiers.TIER2, 60),
-		COOKED_BEEF2(Material.COOKED_BEEF, ECrateTiers.TIER2, 40);
+		IRON_HELMET(Material.IRON_HELMET, ECrateTiers.TIER2, 75),
+		IRON_CHESTPLATE(Material.IRON_CHESTPLATE, ECrateTiers.TIER2, 30),
+		IRON_LEGGINGS(Material.IRON_LEGGINGS, ECrateTiers.TIER2, 75),
+		IRON_BOOTS(Material.IRON_BOOTS, ECrateTiers.TIER2, 50),
+		CHAINMAIL_HELMET(Material.CHAINMAIL_HELMET, ECrateTiers.TIER2, 40),
+		CHAINMAIL_CHESTPLATE(Material.CHAINMAIL_CHESTPLATE, ECrateTiers.TIER2, 60),
+		CHAINMAIL_LEGGINGS(Material.CHAINMAIL_LEGGINGS, ECrateTiers.TIER2, 40),
+		CHAINMAIL_BOOTS(Material.CHAINMAIL_BOOTS, ECrateTiers.TIER2, 40),
+		GOLD_HELMET2(Material.GOLD_HELMET, ECrateTiers.TIER2, 40),
+		GOLD_CHESTPLATE2(Material.GOLD_CHESTPLATE, ECrateTiers.TIER2, 40),
+		GOLD_LEGGINGS2(Material.GOLD_LEGGINGS, ECrateTiers.TIER2, 40),
+		GOLD_BOOTS2(Material.GOLD_BOOTS, ECrateTiers.TIER2, 40),
+		BREAD2(Material.BREAD, ECrateTiers.TIER2, 40),
+		FLINT_AND_STEEL(Material.FLINT_AND_STEEL, ECrateTiers.TIER2, 40),
+		BOW2(Material.BOW, ECrateTiers.TIER2, 40),
+//		GAPPLE(Material.FISHING_ROD, ECrateTiers.TIER2, 40),
+		DIAMOND(Material.DIAMOND, ECrateTiers.TIER2, 40),
+		STONE_SWORD2(Material.STONE_SWORD, ECrateTiers.TIER2, 40),
+		MUSHROOM_SOUP(Material.MUSHROOM_SOUP, ECrateTiers.TIER2, 40),
+		COOKED_BEEF(Material.COOKED_BEEF, ECrateTiers.TIER2, 40);
 		
 		private Material material;
 		private ECrateTiers tier;
