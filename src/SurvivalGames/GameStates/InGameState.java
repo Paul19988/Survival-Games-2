@@ -206,8 +206,20 @@ public class InGameState extends GameState implements Listener {
 		if (inGameTimer == 299) m.send(ChatColor.RED + "" + ChatColor.BOLD + "Let the games begin!", MessageDisplay.TITLE); 
 	}
 	
+	private String timeConversion() {
+		int hours = inGameTimer / 60 / 60;
+		int minutes = (inGameTimer - (hours * 60 * 60)) / 60;
+		int seconds = inGameTimer - (minutes * 60);
+
+		if (seconds < 10) {
+			return minutes + ":0" + seconds;
+		}
+
+		return minutes + ":" + seconds;
+	}
+	
 	public String getTime() {
-		return inGameTimer / 60 / 60 + ":" + inGameTimer / 60 / 60 / 60 + ":" + inGameTimer / 60 / 60 / 60 / 60;
+		return inGameTimer / 60 + ":" + inGameTimer / 60 / 60 / 60 + ":" + inGameTimer / 60 / 60 / 60 / 60;
 	}
 	
 	private int tier1ItemAmount = getItemsinTierSector(ECrateTiers.TIER1);
