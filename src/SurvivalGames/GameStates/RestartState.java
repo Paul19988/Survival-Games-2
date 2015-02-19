@@ -41,6 +41,7 @@ public class RestartState extends GameState implements Listener {
 		return false;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void tick() {
 		restartTimer--;
@@ -60,9 +61,9 @@ public class RestartState extends GameState implements Listener {
 			DataOutputStream out = new DataOutputStream(b);
 			try {
 				out.writeUTF("Connect");
-				out.writeUTF("arcade");
+				out.writeUTF("hub");
 			} catch (IOException eee) {
-				p.sendMessage(V.prefix + "Server Offline.");
+				p.sendMessage("Server Offline.");
 				Bukkit.getLogger().info("You'll never see me!");
 			}
 			p.sendPluginMessage(Core.plugin, "BungeeCord", b.toByteArray());

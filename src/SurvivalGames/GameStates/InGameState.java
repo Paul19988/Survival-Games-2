@@ -1,6 +1,7 @@
 package SurvivalGames.GameStates;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 import me.olivervscreeper.networkutilities.game.Game;
@@ -14,6 +15,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -157,9 +159,29 @@ public class InGameState extends GameState implements Listener {
 		Player p = e.getPlayer();
 		gameInstance.addSpectator(p);
 	}
+
+	public static World DMatchMap;
+	
+	public void TPToDMatchArena(){
+		DMatchMap = Bukkit.getWorld("DeathMatch");
+		@SuppressWarnings("rawtypes")
+		Iterator iterator = Core.game.players.keySet().iterator();
+		World dmatch = Bukkit.getWorld("DeathMatch");
+		dmatch.setAutoSave(false);
+		for (int i = 4; i > 0; i--) {
+			Core.plugin.getConfig().get("DeathMatch.spawn" + i + ".x");
+			double spawnx = Core.plugin.getConfig().getDouble("DeathMatch" + ".spawn" + i + ".x");
+			double spawny = Core.plugin.getConfig().getDouble("DeathMatch" + ".spawn" + i + ".y");
+			double spawnz = Core.plugin.getConfig().getDouble("DeathMatch" + ".spawn" + i + ".z");
+			int spawnyaw = Core.plugin.getConfig().getInt("DeathMatch" + ".spawn" + i + ".yaw");
+			int spawnpitch = Core.plugin.getConfig().getInt("DeathMatch" + ".spawn" + i + ".pitch");
+			Bukkit.getPlayer((String) iterator.next()).teleport(new Location(Bukkit.getWorld("DeathMatch"), spawnx, spawny, spawnz, spawnyaw, spawnpitch));
+		}
+	}
 	
 	private int inGameTimer = 1200;
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void tick() {
 		inGameTimer--;
@@ -198,7 +220,7 @@ public class InGameState extends GameState implements Listener {
 		Inventory inv;
 		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock().getType().equals(Material.REDSTONE_BLOCK)) {
 			loc = e.getClickedBlock().getLocation();
-			inv = Bukkit.createInventory(null, 27, ChatColor.DARK_RED + "TMSN" + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + ">" + ChatColor.GREEN + "Supply Crate");
+			inv = Bukkit.createInventory(null, 27, ChatColor.GREEN + "Supply Crate");
 			
 			int itemsInChest = random.nextInt();
 			ECrateTiers randomTier = random.nextInt(2) == 0 ? ECrateTiers.TIER1 : ECrateTiers.TIER2;

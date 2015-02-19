@@ -88,6 +88,7 @@ public class PreGameState extends GameState implements Listener {
 	private Message m = new Message(Message.BLANK);
 	public static World Map;
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void tick() {
 		PreGameTimer--;
