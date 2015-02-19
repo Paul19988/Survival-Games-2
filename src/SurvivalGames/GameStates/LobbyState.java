@@ -112,13 +112,14 @@ public class LobbyState extends GameState implements Listener {
 			}
 		}
 		if (lobbyTimer == 0) {
-			if (Core.plugin.getServer().getOnlinePlayers().length < 12) {
+			m.send(ChatColor.DARK_RED + "" + ChatColor.BOLD + "1 Seconds!", MessageDisplay.TITLE); 
+			if (players.length < 12) {
 				for (Player all : Core.plugin.getServer().getOnlinePlayers()) {
-					V.prefix.addRecipient(all).send("Restarting Timer! (" + Bukkit.getOnlinePlayers().length + "/" + Bukkit.getMaxPlayers() + ")");
+					V.prefix.addRecipient(all).send("Not Enough Players Restarting Timer! (" + Bukkit.getOnlinePlayers().length + "/" + Bukkit.getMaxPlayers() + ")");
 				}
 				lobbyTimer = 60;
-				Core.game.getLogger().log("In-Lobby", "Not Enough Players Restarting! (" + Bukkit.getOnlinePlayers().length + "/" + Bukkit.getMaxPlayers() + ")");
-				m.send(ChatColor.AQUA + "" + ChatColor.BOLD + "Restarting Timer! (" + Bukkit.getOnlinePlayers().length + "/" + Bukkit.getMaxPlayers() + ")", MessageDisplay.TITLE);
+				Core.game.getLogger().log("In-Lobby", "Not Enough Players Restarting Timer! (" + Bukkit.getOnlinePlayers().length + "/" + Bukkit.getMaxPlayers() + ")");
+				m.send(ChatColor.AQUA + "" + ChatColor.BOLD + "Not Enough Players Restarting Timer! (" + Bukkit.getOnlinePlayers().length + "/" + Bukkit.getMaxPlayers() + ")", MessageDisplay.TITLE);
 			} else {
 				for (Player all : Core.plugin.getServer().getOnlinePlayers()) {
 					V.prefix.addRecipient(all).send("Starting game!");
