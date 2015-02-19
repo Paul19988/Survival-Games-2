@@ -98,7 +98,7 @@ public class PreGameState extends GameState implements Listener {
 			all.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
 		}
 		if (PreGameTimer == 29) {
-			if (Math.max(LobbyState.getMaps()[0], Math.max(LobbyState.getMaps()[2], Math.max(LobbyState.getMaps()[3], LobbyState.getMaps()[4]))) == LobbyState.getMaps()[1]) {
+			if (Math.max(LobbyState.getMaps()[1], Math.max(LobbyState.getMaps()[2], LobbyState.getMaps()[3])) == LobbyState.getMaps()[0]) {
 				Map = Core.world1;
 				@SuppressWarnings("rawtypes")
 				Iterator iterator = Core.game.players.keySet().iterator();
@@ -113,7 +113,7 @@ public class PreGameState extends GameState implements Listener {
 					int spawnpitch = Core.plugin.getConfig().getInt("Tribal_Vibes" + ".spawn" + i + ".pitch");
 					Bukkit.getPlayer((String) iterator.next()).teleport(new Location(Bukkit.getWorld("Tribal_Vibes"), spawnx, spawny, spawnz, spawnyaw, spawnpitch));
 				}
-			} else if (Math.max(LobbyState.getMaps()[0], Math.max(LobbyState.getMaps()[2], Math.max(LobbyState.getMaps()[3], LobbyState.getMaps()[4]))) == LobbyState.getMaps()[2]) {
+			} else if (Math.max(LobbyState.getMaps()[0], Math.max(LobbyState.getMaps()[2], LobbyState.getMaps()[3])) == LobbyState.getMaps()[1]) {
 				Map = Core.world2;
 				@SuppressWarnings("rawtypes")
 				Iterator iterator = Core.game.players.keySet().iterator();
@@ -128,7 +128,7 @@ public class PreGameState extends GameState implements Listener {
 					int spawnpitch = Core.plugin.getConfig().getInt("Avaricia" + ".spawn" + i + ".pitch");
 					Bukkit.getPlayer((String) iterator.next()).teleport(new Location(Bukkit.getWorld("Avaricia"), spawnx, spawny, spawnz, spawnyaw, spawnpitch));
 				}
-			} else if (Math.max(LobbyState.getMaps()[0], Math.max(LobbyState.getMaps()[2], Math.max(LobbyState.getMaps()[3], LobbyState.getMaps()[4]))) == LobbyState.getMaps()[3]) {
+			} else if (Math.max(LobbyState.getMaps()[0], Math.max(LobbyState.getMaps()[1], LobbyState.getMaps()[3])) == LobbyState.getMaps()[2]) {
 				Map = Core.world3;
 				@SuppressWarnings("rawtypes")
 				Iterator iterator = Core.game.players.keySet().iterator();
@@ -143,7 +143,7 @@ public class PreGameState extends GameState implements Listener {
 					int spawnpitch = Core.plugin.getConfig().getInt("Survival_Games_6" + ".spawn" + i + ".pitch");
 					Bukkit.getPlayer((String) iterator.next()).teleport(new Location(Bukkit.getWorld("Survival_Games_6"), spawnx, spawny, spawnz, spawnyaw, spawnpitch));
 				}
-			} else if (Math.max(LobbyState.getMaps()[0], Math.max(LobbyState.getMaps()[2], Math.max(LobbyState.getMaps()[3], LobbyState.getMaps()[4]))) == LobbyState.getMaps()[4]) {
+			} else if (Math.max(LobbyState.getMaps()[0], Math.max(LobbyState.getMaps()[1], LobbyState.getMaps()[2])) == LobbyState.getMaps()[3]) {
 				Map = Core.world4;
 				@SuppressWarnings("rawtypes")
 				Iterator iterator = Core.game.players.keySet().iterator();
