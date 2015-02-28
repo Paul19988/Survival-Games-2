@@ -41,7 +41,7 @@ public class Core extends JavaPlugin implements Listener {
 		game = new SurvivalGamesGame(new NULogger(true));
 		plugin = this;
 		
-		lobby = Bukkit.getServer().createWorld(new WorldCreator("Lobby"));
+		lobby = Bukkit.getServer().createWorld(new WorldCreator("lobby"));
 		lobby.setAutoSave(false);
 		world1 = Bukkit.getServer().createWorld(new WorldCreator("Map1"));
 		world1.setAutoSave(false);

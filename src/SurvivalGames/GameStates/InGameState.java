@@ -86,20 +86,20 @@ public class InGameState extends GameState implements Listener {
 		IRON_BOOTS(Material.IRON_BOOTS, ECrateTiers.TIER2, 50),
 		CHAINMAIL_HELMET(Material.CHAINMAIL_HELMET, ECrateTiers.TIER2, 40),
 		CHAINMAIL_CHESTPLATE(Material.CHAINMAIL_CHESTPLATE, ECrateTiers.TIER2, 60),
-		CHAINMAIL_LEGGINGS(Material.CHAINMAIL_LEGGINGS, ECrateTiers.TIER2, 40),
-		CHAINMAIL_BOOTS(Material.CHAINMAIL_BOOTS, ECrateTiers.TIER2, 40),
-		GOLD_HELMET2(Material.GOLD_HELMET, ECrateTiers.TIER2, 40),
-		GOLD_CHESTPLATE2(Material.GOLD_CHESTPLATE, ECrateTiers.TIER2, 40),
-		GOLD_LEGGINGS2(Material.GOLD_LEGGINGS, ECrateTiers.TIER2, 40),
-		GOLD_BOOTS2(Material.GOLD_BOOTS, ECrateTiers.TIER2, 40),
-		BREAD2(Material.BREAD, ECrateTiers.TIER2, 40),
-		FLINT_AND_STEEL(Material.FLINT_AND_STEEL, ECrateTiers.TIER2, 40),
-		BOW2(Material.BOW, ECrateTiers.TIER2, 40),
+		CHAINMAIL_LEGGINGS(Material.CHAINMAIL_LEGGINGS, ECrateTiers.TIER2, 41),
+		CHAINMAIL_BOOTS(Material.CHAINMAIL_BOOTS, ECrateTiers.TIER2, 42),
+		GOLD_HELMET2(Material.GOLD_HELMET, ECrateTiers.TIER2, 43),
+		GOLD_CHESTPLATE2(Material.GOLD_CHESTPLATE, ECrateTiers.TIER2, 44),
+		GOLD_LEGGINGS2(Material.GOLD_LEGGINGS, ECrateTiers.TIER2, 45),
+		GOLD_BOOTS2(Material.GOLD_BOOTS, ECrateTiers.TIER2, 46),
+		BREAD2(Material.BREAD, ECrateTiers.TIER2, 47),
+		FLINT_AND_STEEL(Material.FLINT_AND_STEEL, ECrateTiers.TIER2, 48),
+		BOW2(Material.BOW, ECrateTiers.TIER2, 49),
 //		GAPPLE(Material.FISHING_ROD, ECrateTiers.TIER2, 40),
-		DIAMOND(Material.DIAMOND, ECrateTiers.TIER2, 40),
-		STONE_SWORD2(Material.STONE_SWORD, ECrateTiers.TIER2, 40),
-		MUSHROOM_SOUP(Material.MUSHROOM_SOUP, ECrateTiers.TIER2, 40),
-		COOKED_BEEF(Material.COOKED_BEEF, ECrateTiers.TIER2, 40);
+		DIAMOND(Material.DIAMOND, ECrateTiers.TIER2, 51),
+		STONE_SWORD2(Material.STONE_SWORD, ECrateTiers.TIER2, 52),
+		MUSHROOM_SOUP(Material.MUSHROOM_SOUP, ECrateTiers.TIER2, 53),
+		COOKED_BEEF(Material.COOKED_BEEF, ECrateTiers.TIER2, 54);
 		
 		private Material material;
 		private ECrateTiers tier;
@@ -219,7 +219,7 @@ public class InGameState extends GameState implements Listener {
 	}
 	
 	public String getTime() {
-		return inGameTimer / 60 + ":" + inGameTimer / 60 / 60 / 60 + ":" + inGameTimer / 60 / 60 / 60 / 60;
+		return timeConversion();
 	}
 	
 	private int tier1ItemAmount = getItemsinTierSector(ECrateTiers.TIER1);
