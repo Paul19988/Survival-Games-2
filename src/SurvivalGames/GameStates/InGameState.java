@@ -244,42 +244,16 @@ public class InGameState extends GameState implements Listener {
 		}
 	}
 	
-	private int randomchance = 0;
-	private int[] options = getChoicesOfValues(ECrateTiers.TIER1);
-	private int[] options2 = getChoicesOfValues(ECrateTiers.TIER2);
-	private int[] chosenItems;
-	
 	private Material getRandomItem(ECrateTiers tier) {
-		int chances = random.nextInt(options.length);
-		chosenItems = new int[chances];
-		if (tier == ECrateTiers.TIER1) {
-			for (int item = 0; item < chances; item++) {
-				chosenItems[item] = options[item];
+		if () {
+			for (int a = 0; a < tier1ItemAmount) {
+				
 			}
+		} else if () {
 			
-			for (int m = 0; m < ECrateItem.values().length; m++) {
-				int a = ECrateItem.values()[m].chanceToSpawnInTier;
-				if (a == chosenItems[random.nextInt(chosenItems.length)]) {
-					return ECrateItem.values()[m].material;
-				}
-			}
-		} else if (tier == ECrateTiers.TIER2) {
-			for (int item = 0; item < chances; item++) {
-				chosenItems[item] = options[item];
-			}
-			
-			for (int m = 0; m < ECrateItem.values().length; m++) {
-				int a = ECrateItem.values()[m].chanceToSpawnInTier;
-				if (a == chosenItems[random.nextInt(chosenItems.length)]) {
-					return ECrateItem.values()[m].material;
-				}
-			}
 		} else {
-			throwDeveloperErrorMessage(getErrorLocation());
-			return Material.AIR;
+			return null;
 		}
-		throwDeveloperErrorMessage(getErrorLocation(), new NullPointerException());
-		return null;
 	}
 	
 	private int getItemsinTierSector(ECrateTiers tier) {
@@ -296,17 +270,5 @@ public class InGameState extends GameState implements Listener {
 			values[a] = ECrateItem.values()[a].chanceToSpawnInTier;
 		}
 		return values;
-	}
-	
-	private void throwDeveloperErrorMessage(String errorLocation) {
-		Core.game.getLogger().log("Developer", "An Error has occured! [" + errorLocation + "] \nPlease contact Twitter >>> @Paul19988 or @Thecheatgamer1");
-	}
-	
-	private void throwDeveloperErrorMessage(String errorLocation, Exception ex) {
-		Core.game.getLogger().log("Developer", "An Error has occured! [" + errorLocation + "]\n" + ex.getMessage() + " \nPlease contact Twitter >>> @Paul19988 or @Thecheatgamer1");
-	}
-	
-	private String getErrorLocation() {
-		return ele[0].getFileName() + " >> " + ele[0].getMethodName() + " >> " + ele[0].getLineNumber();
 	}
 }
