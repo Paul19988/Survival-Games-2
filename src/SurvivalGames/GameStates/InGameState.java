@@ -32,14 +32,8 @@ import SurvivalGames.V;
 public class InGameState extends GameState implements Listener {
 	
 	private Random random = new Random();
-	private StackTraceElement[] ele = Thread.currentThread().getStackTrace();
 	
-	enum ECrateTiers {
-		TIER1(),
-		TIER2()
-	}
-	
-	enum ECrateItem {
+	/*
 		
 		// Tier 1
 		
@@ -100,21 +94,7 @@ public class InGameState extends GameState implements Listener {
 		STONE_SWORD2(Material.STONE_SWORD, ECrateTiers.TIER2, 52),
 		MUSHROOM_SOUP(Material.MUSHROOM_SOUP, ECrateTiers.TIER2, 53),
 		COOKED_BEEF(Material.COOKED_BEEF, ECrateTiers.TIER2, 54);
-		
-		private Material material;
-		private ECrateTiers tier;
-		private int chanceToSpawnInTier;
-		
-		ECrateItem(Material material, ECrateTiers tier, int chanceToSpawnInTier) {
-			this.material = material;
-			this.tier = tier;
-			this.chanceToSpawnInTier = chanceToSpawnInTier;
-		}
-		
-		public Material getItemMaterial(ECrateItem item) {return material;}
-		public ECrateTiers getItemTier(ECrateItem item) {return tier;}
-		public int getChanceToSpawn(ECrateItem item) {return chanceToSpawnInTier;}
-	}
+		*/
 	
 	public InGameState(Game game) {
 		super(game, "InGameState", "InGameState");
@@ -222,9 +202,6 @@ public class InGameState extends GameState implements Listener {
 		return timeConversion();
 	}
 	
-	private int tier1ItemAmount = getItemsinTierSector(ECrateTiers.TIER1);
-	private int tier2ItemAmount = getItemsinTierSector(ECrateTiers.TIER2);
-	
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
@@ -234,41 +211,11 @@ public class InGameState extends GameState implements Listener {
 			loc = e.getClickedBlock().getLocation();
 			inv = Bukkit.createInventory(null, 27, ChatColor.GREEN + "Supply Crate");
 			
-			int itemsInChest = random.nextInt();
-			ECrateTiers randomTier = random.nextInt(2) == 0 ? ECrateTiers.TIER1 : ECrateTiers.TIER2;
+			/*
+			 * New system is called here
+			 */
 			
-			for (int i = 0; i < itemsInChest; i++) {
-				inv.setItem(random.nextInt(inv.getSize()), new ItemStack(getRandomItem(randomTier)));
-			}
 			p.openInventory(inv);
 		}
-	}
-	
-	private Material getRandomItem(ECrateTiers tier) {
-		if () {
-			for (int a = 0; a < tier1ItemAmount) {
-				
-			}
-		} else if () {
-			
-		} else {
-			return null;
-		}
-	}
-	
-	private int getItemsinTierSector(ECrateTiers tier) {
-		int amount = 0;
-		for (int a = 0; a < ECrateItem.values().length; a++) {
-			if (ECrateItem.values()[a].name().contains((tier == ECrateTiers.TIER1 ? "1" : "2"))) amount++;
-		}
-		return amount;
-	}
-	
-	private int[] getChoicesOfValues(ECrateTiers tier) {
-		int[] values = new int[(tier == ECrateTiers.TIER1 ? tier1ItemAmount : tier2ItemAmount)];
-		for (int a = tier == ECrateTiers.TIER1 ? tier1ItemAmount : 0; a < (tier == ECrateTiers.TIER1 ? tier1ItemAmount : tier2ItemAmount); a++) {
-			values[a] = ECrateItem.values()[a].chanceToSpawnInTier;
-		}
-		return values;
 	}
 }
