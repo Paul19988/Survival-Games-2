@@ -202,20 +202,50 @@ public class InGameState extends GameState implements Listener {
 		return timeConversion();
 	}
 	
+	/*
+	 * Crate System
+	 * @Author -> Thecheatgamer1
+	 */
+	
+	private HashMap<Location, Inventory> invs = new HashMap<Location, Inventory>();
+	private Material[] tier1 = new Material[64];
+	private Material[] tier2 = new Material[64];
+	
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
-		Location loc;
-		Inventory inv;
 		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock().getType().equals(Material.REDSTONE_BLOCK)) {
-			loc = e.getClickedBlock().getLocation();
-			inv = Bukkit.createInventory(null, 27, ChatColor.GREEN + "Supply Crate");
 			
 			/*
 			 * New system is called here
 			 */
-			
+			Inventory inv = createInventory(p, e.getClickedBlock().getLocation());
 			p.openInventory(inv);
 		}
+	}
+	
+	public Inventory createInventory(Player p, Location loc) {
+		Inventory inv = Bukkit.createInventory(null, 27, ChatColor.GREEN + "Supply Crate");
+		invs.put(loc, inv);
+		
+		
+		
+		return inv;
+	}
+	
+	public void addItem(int tier, Material material) {
+		if (tier == 1) {
+			tier1[getArrayNonNullSize(tier1)] = material;
+		} else {
+			tier2[getArrayNonNullSize(tier2)] = material;
+		}
+	}
+	
+	private int getArrayNonNullSize(Material[] mat) {
+		int i = 0;
+		for (int a = 0; a < mat.length; a++) {
+			if (mat[i] != null) i++; else continue;
+		}
+		return i;
 	}
 }
