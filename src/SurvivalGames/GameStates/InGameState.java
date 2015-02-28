@@ -257,6 +257,6 @@ public class InGameState extends GameState implements Listener {
 		for (int a = 0; a < mat.length; a++) {
 			if (mat[i] != null) i++; else return i;
 		}
-		return null;
+		return 0;
 	}
 }
