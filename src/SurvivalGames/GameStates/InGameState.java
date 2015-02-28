@@ -255,8 +255,8 @@ public class InGameState extends GameState implements Listener {
 	private int getArrayNonNullSize(Material[] mat) {
 		int i = 0;
 		for (int a = 0; a < mat.length; a++) {
-			if (mat[i] != null) i++; else continue;
+			if (mat[i] != null) i++; else return i;
 		}
-		return i;
+		return null;
 	}
 }
