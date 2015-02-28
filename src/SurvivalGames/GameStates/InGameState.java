@@ -207,24 +207,20 @@ public class InGameState extends GameState implements Listener {
 	 * @Author -> Thecheatgamer1
 	 */
 	
-	private HashMap<Location, Inventory> invs = new HashMap<Location, Inventory>();
-	private Material[] tier1 = new Material[64];
-	private Material[] tier2 = new Material[64];
+	private static HashMap<Location, Inventory> invs = new HashMap<Location, Inventory>();
+	private static Material[] tier1 = new Material[64];
+	private static Material[] tier2 = new Material[64];
 	
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
 		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock().getType().equals(Material.REDSTONE_BLOCK)) {
-			
-			/*
-			 * New system is called here
-			 */
 			Inventory inv = createInventory(p, e.getClickedBlock().getLocation());
 			p.openInventory(inv);
 		}
 	}
 	
-	public Inventory createInventory(Player p, Location loc) {
+	public static Inventory createInventory(Player p, Location loc) {
 		Inventory inv = Bukkit.createInventory(null, 27, ChatColor.GREEN + "Supply Crate");
 		invs.put(loc, inv);
 		
@@ -233,7 +229,7 @@ public class InGameState extends GameState implements Listener {
 		return inv;
 	}
 	
-	public void addItem(int tier, Material material) {
+	public static void addItem(int tier, Material material) {
 		if (tier == 1) {
 			tier1[getArrayNonNullSize(tier1)] = material;
 		} else {
@@ -241,7 +237,7 @@ public class InGameState extends GameState implements Listener {
 		}
 	}
 	
-	private int getArrayNonNullSize(Material[] mat) {
+	private static int getArrayNonNullSize(Material[] mat) {
 		int i = 0;
 		for (int a = 0; a < mat.length; a++) {
 			if (mat[i] != null) i++; else continue;
