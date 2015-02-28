@@ -233,11 +233,11 @@ public class InGameState extends GameState implements Listener {
 		
 		if (random.nextBoolean()) {
 			for (int a = 0; a < inv.getSize(); a++) {
-				if (random.nextInt(101) > 75) inv.addItem(new ItemStack(tier1[random.nextInt(arraySize + 1)]));
+				if (random.nextInt(101) > 75) inv.addItem(new ItemStack(tier1[random.nextInt(arraySize)]));
 			}
 		} else {
 			for (int a = 0; a < inv.getSize(); a++) {
-				if (random.nextInt(101) > 25) inv.addItem(new ItemStack(tier2[random.nextInt(arraySize + 1)]));
+				if (random.nextInt(101) > 25) inv.addItem(new ItemStack(tier2[random.nextInt(arraySize)]));
 			}
 		}
 		invs.put(loc, inv);
