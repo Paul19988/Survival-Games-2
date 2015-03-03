@@ -1,7 +1,0 @@
-name: SurvivalGames
-main: SurvivalGames.Core
-version: 2.0
-author: Paul19988
-website: http://paulcodes.co.uk
-depend: [NetworkUtilities]
-commands:
