@@ -219,16 +219,15 @@ public class InGameState extends GameState implements Listener {
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
-		Inventory inv;
-		inv = Bukkit.createInventory(null, 27, ChatColor.GREEN + "Supply Crate");
+		Inventory inv = Bukkit.createInventory(null, 27, ChatColor.GREEN + "Supply Crate");
 		
 		if (random.nextBoolean()) {
 			for (int a = 0; a < inv.getSize(); a++) {
-				if (random.nextInt(101) > 75) inv.addItem(new ItemStack(tier1[random.nextInt(arraySize)]));
+				if (random.nextInt(101) > 75) inv.addItem(new ItemStack(tier1[random.nextInt(getArrayNonNullSize(tier1) + 1)]));
 			}
 		} else {
 			for (int a = 0; a < inv.getSize(); a++) {
-				if (random.nextInt(101) > 25) inv.addItem(new ItemStack(tier2[random.nextInt(arraySize)]));
+				if (random.nextInt(101) > 25) inv.addItem(new ItemStack(tier2[random.nextInt(getArrayNonNullSize(tier2) + 1)]));
 			}
 		}
 		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock().getType().equals(Material.REDSTONE_BLOCK)) {
