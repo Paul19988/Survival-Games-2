@@ -219,17 +219,8 @@ public class InGameState extends GameState implements Listener {
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
-		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock().getType().equals(Material.REDSTONE_BLOCK)) {
-			if (invs.get(e.getClickedBlock().getLocation()) != null) {
-				p.openInventory(invs.get(e.getClickedBlock().getLocation()));
-			} else {
-				p.openInventory(createInventory(p, e.getClickedBlock().getLocation()));
-			}
-		}
-	}
-	
-	public Inventory createInventory(Player p, Location loc) {
-		Inventory inv = Bukkit.createInventory(null, 27, ChatColor.GREEN + "Supply Crate");
+		Inventory inv;
+		inv = Bukkit.createInventory(null, 27, ChatColor.GREEN + "Supply Crate");
 		
 		if (random.nextBoolean()) {
 			for (int a = 0; a < inv.getSize(); a++) {
@@ -240,8 +231,14 @@ public class InGameState extends GameState implements Listener {
 				if (random.nextInt(101) > 25) inv.addItem(new ItemStack(tier2[random.nextInt(arraySize)]));
 			}
 		}
-		invs.put(loc, inv);
-		return inv;
+		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock().getType().equals(Material.REDSTONE_BLOCK)) {
+			if (invs.get(e.getClickedBlock().getLocation()) != null) {
+				p.openInventory(invs.get(e.getClickedBlock().getLocation()));
+			} else {
+				invs.put(e.getClickedBlock().getLocation(), inv);
+				p.openInventory(inv);
+			}
+		}
 	}
 	
 	public void addItem(int tier, Material material) {
