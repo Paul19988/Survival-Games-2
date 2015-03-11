@@ -98,10 +98,6 @@ public class InGameState extends GameState implements Listener {
 	
 	public InGameState(Game game) {
 		super(game, "InGameState", "InGameState");
-		
-		addItem(1, Material.ARROW);
-		
-		addItem(2, Material.IRON_HELMET);
 	}
 
 	@Override
@@ -206,53 +202,55 @@ public class InGameState extends GameState implements Listener {
 		return timeConversion();
 	}
 	
-	/*
-	 * Crate System
-	 * @Author -> Thecheatgamer1
-	 */
+	// Temp removal of new Crate system due to bugs
 	
-	private HashMap<Location, Inventory> invs = new HashMap<Location, Inventory>();
-	private final int arraySize = 64;
-	private Material[] tier1 = new Material[arraySize];
-	private Material[] tier2 = new Material[arraySize];
-	
-	@EventHandler
-	public void onPlayerInteract(PlayerInteractEvent e) {
-		Player p = e.getPlayer();
-		Inventory inv = Bukkit.createInventory(null, 27, ChatColor.GREEN + "Supply Crate");
-		
-		if (random.nextBoolean()) {
-			for (int a = 0; a < inv.getSize(); a++) {
-				if (random.nextInt(101) > 75) inv.addItem(new ItemStack(tier1[random.nextInt(getArrayNonNullSize(tier1) + 1)]));
-			}
-		} else {
-			for (int a = 0; a < inv.getSize(); a++) {
-				if (random.nextInt(101) > 25) inv.addItem(new ItemStack(tier2[random.nextInt(getArrayNonNullSize(tier2) + 1)]));
-			}
-		}
-		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock().getType().equals(Material.REDSTONE_BLOCK)) {
-			if (invs.get(e.getClickedBlock().getLocation()) != null) {
-				p.openInventory(invs.get(e.getClickedBlock().getLocation()));
-			} else {
-				invs.put(e.getClickedBlock().getLocation(), inv);
-				p.openInventory(inv);
-			}
-		}
-	}
-	
-	public void addItem(int tier, Material material) {
-		if (tier == 1) {
-			tier1[getArrayNonNullSize(tier1)] = material;
-		} else {
-			tier2[getArrayNonNullSize(tier2)] = material;
-		}
-	}
-	
-	private int getArrayNonNullSize(Material[] mat) {
-		int i = 0;
-		for (int a = 0; a < mat.length; a++) {
-			if (mat[i] != null) i++; else return i;
-		}
-		return 0;
-	}
+//	/*
+//	 * Crate System
+//	 * @Author -> Thecheatgamer1
+//	 */
+//	
+//	private HashMap<Location, Inventory> invs = new HashMap<Location, Inventory>();
+//	private final int arraySize = 64;
+//	private Material[] tier1 = new Material[arraySize];
+//	private Material[] tier2 = new Material[arraySize];
+//	
+//	@EventHandler
+//	public void onPlayerInteract(PlayerInteractEvent e) {
+//		Player p = e.getPlayer();
+//		Inventory inv = Bukkit.createInventory(null, 27, ChatColor.GREEN + "Supply Crate");
+//		
+//		if (random.nextBoolean()) {
+//			for (int a = 0; a < inv.getSize(); a++) {
+//				if (random.nextInt(101) > 75) inv.addItem(new ItemStack(tier1[random.nextInt(getArrayNonNullSize(tier1) + 1)]));
+//			}
+//		} else {
+//			for (int a = 0; a < inv.getSize(); a++) {
+//				if (random.nextInt(101) > 25) inv.addItem(new ItemStack(tier2[random.nextInt(getArrayNonNullSize(tier2) + 1)]));
+//			}
+//		}
+//		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock().getType().equals(Material.REDSTONE_BLOCK)) {
+//			if (invs.get(e.getClickedBlock().getLocation()) != null) {
+//				p.openInventory(invs.get(e.getClickedBlock().getLocation()));
+//			} else {
+//				invs.put(e.getClickedBlock().getLocation(), inv);
+//				p.openInventory(inv);
+//			}
+//		}
+//	}
+//	
+//	public void addItem(int tier, Material material) {
+//		if (tier == 1) {
+//			tier1[getArrayNonNullSize(tier1)] = material;
+//		} else {
+//			tier2[getArrayNonNullSize(tier2)] = material;
+//		}
+//	}
+//	
+//	private int getArrayNonNullSize(Material[] mat) {
+//		int i = 0;
+//		for (int a = 0; a < mat.length; a++) {
+//			if (mat[i] != null) i++; else return i;
+//		}
+//		return 0;
+//	}
 }
