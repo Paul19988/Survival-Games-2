@@ -2,17 +2,20 @@ package SurvivalGames;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import me.olivervscreeper.networkutilities.NULogger;
 import me.olivervscreeper.networkutilities.NetworkUtilities;
 import me.olivervscreeper.networkutilities.command.CommandManager;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Core extends JavaPlugin implements Listener {
@@ -78,4 +81,6 @@ public class Core extends JavaPlugin implements Listener {
 			}
 		}
 	}
+    public static HashMap<Location, Inventory> crates1 = new HashMap<Location, Inventory>();
+    public static HashMap<Location, Inventory> crates2 = new HashMap<Location, Inventory>();
 }

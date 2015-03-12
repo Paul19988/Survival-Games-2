@@ -142,6 +142,134 @@ public class InGameState extends GameState implements Listener {
 
 	public static World DMatchMap;
 	
+	@EventHandler
+	public void playerClick2(PlayerInteractEvent e) {
+
+		Player pl = e.getPlayer();
+
+		if (!gameInstance.spectators.containsKey(pl.getName())) {
+
+			if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+
+				if (e.getClickedBlock().getTypeId() == 152 && e.getClickedBlock().getData() == (byte) 7) {
+
+					Location loc = e.getClickedBlock().getLocation();
+
+					if (Core.crates1.get(loc) == null) {
+
+						Player p = e.getPlayer();
+
+						Inventory inv = Bukkit.createInventory(null, 27, ChatColor.GREEN + "Supply Crate | Tier 1");
+
+						Core.crates1.put(loc, inv);
+
+						inv.clear();
+
+						Random r = new Random();
+						int random = r.nextInt(4);
+						Random i = new Random();
+
+						// Set 1 ---
+
+						if (random == 0) {
+							inv.setItem(i.nextInt(27), new ItemStack(Material.ARROW, i.nextInt(15) + 1));
+						}
+
+						if (random == 1) {
+							inv.setItem(i.nextInt(27), new ItemStack(Material.WOOD_SWORD, 1));
+						}
+
+						if (random == 2) {
+							inv.setItem(i.nextInt(27), new ItemStack(Material.LEATHER_BOOTS, 1));
+						}
+
+						if (random == 3) {
+							inv.setItem(i.nextInt(27), new ItemStack(Material.LEATHER_HELMET, 1));
+						}
+
+						if (random == 4) {
+							inv.setItem(i.nextInt(27), new ItemStack(Material.LEATHER_CHESTPLATE, 1));
+						}
+
+						Random r2 = new Random();
+						int random2 = r2.nextInt(4);
+						Random i2 = new Random();
+
+						// Set 2 ---
+
+						if (random2 == 0) {
+							inv.setItem(i2.nextInt(27), new ItemStack(Material.LEATHER_LEGGINGS, 1));
+						}
+
+						if (random2 == 1) {
+							inv.setItem(i2.nextInt(27), new ItemStack(Material.STONE_SWORD, 1));
+						}
+
+						if (random2 == 2) {
+							inv.setItem(i2.nextInt(27), new ItemStack(Material.MELON, 1));
+						}
+
+						if (random2 == 3) {
+							inv.setItem(i2.nextInt(27), new ItemStack(Material.PORK, i2.nextInt(2) + 1));
+						}
+
+						if (random2 == 4) {
+							inv.setItem(i2.nextInt(27), new ItemStack(Material.GOLD_HELMET, 1));
+						}
+
+						Random r3 = new Random();
+						int random3 = r3.nextInt(3);
+						Random i3 = new Random();
+
+						// Set 3 ---
+
+						if (random3 == 0) {
+							inv.setItem(i3.nextInt(27), new ItemStack(Material.FEATHER, i3.nextInt(3) + 1));
+						}
+
+						if (random3 == 1) {
+							inv.setItem(i3.nextInt(27), new ItemStack(Material.STONE_SWORD, 1));
+						}
+
+						if (random3 == 2) {
+							inv.setItem(i3.nextInt(27), new ItemStack(Material.GOLD_BOOTS, 1));
+						} 
+						if (random3 == 3) {
+							inv.setItem(i3.nextInt(27), new ItemStack(Material.LEATHER_LEGGINGS, 1));
+						}
+
+						Random r4 = new Random();
+						int random4 = r4.nextInt(3);
+						Random i4 = new Random();
+
+						// Set 4 ---
+
+						if (random4 == 0) {
+							inv.setItem(i4.nextInt(27), new ItemStack(Material.GOLD_LEGGINGS, 1));
+						}
+						if (random4 == 1) {
+							inv.setItem(i4.nextInt(27), new ItemStack(Material.LEATHER_CHESTPLATE, 1));
+						}
+						if (random4 == 2) {
+							inv.setItem(i4.nextInt(27), new ItemStack(Material.CARROT_ITEM, i4.nextInt(2) + 1));
+						}
+						if (random4 == 3) {
+							inv.setItem(i4.nextInt(27), new ItemStack(Material.STICK, i4.nextInt(1) + 1));
+						}
+						if (Core.crates1.get(loc) == inv) {
+							p.openInventory(inv);
+						}
+					} else {
+						Player p = e.getPlayer();
+						Inventory inv = Core.crates1.get(loc);
+						p.openInventory(inv);
+					}
+
+				}
+			}
+		}
+	}
+	
 	public void TPToDMatchArena(){
 		DMatchMap = Bukkit.getWorld("DeathMatch");
 		@SuppressWarnings("rawtypes")
